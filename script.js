@@ -19,7 +19,7 @@ let noNo = new Audio('no-no-no.wav')
 // --- 1page answer respond
 firstNextBtn.addEventListener('click', function () {
   const inputValue = document.querySelectorAll('.slidepageinput')[0].value
-  if (inputValue === 'yellow') {
+  if (inputValue.trim().toLowerCase() === 'yellow') {
     slidePage.style.marginLeft = '-25%'
     goodAnswer.play()
   } else {
@@ -30,7 +30,7 @@ firstNextBtn.addEventListener('click', function () {
 // --- 2page answer respond
 nextBtnSec.addEventListener('click', function () {
   const inputValue = document.querySelectorAll('.slidepageinput')[1].value
-  if (inputValue === '0') {
+  if (inputValue.trim().toLowerCase() === '0') {
     slidePage.style.marginLeft = '-50%'
     goodAnswer.play()
   } else {
@@ -41,7 +41,7 @@ nextBtnSec.addEventListener('click', function () {
 // --- 3page answer respond
 nextBtnThird.addEventListener('click', function () {
   const inputValue = document.querySelectorAll('.slidepageinput')[2].value
-  if (inputValue === 'ocean') {
+  if (inputValue.trim().toLowerCase() === 'ocean') {
     slidePage.style.marginLeft = '-75%'
     goodAnswer.play()
   } else {
@@ -52,7 +52,7 @@ nextBtnThird.addEventListener('click', function () {
 // --- 4page answer respond
 nextBtnFourth.addEventListener('click', function () {
   const inputValue = document.querySelectorAll('.slidepageinput')[3].value
-  if (inputValue === '20') {
+  if (inputValue.trim().toLowerCase() === '20') {
     slidePage.style.marginLeft = '-100%'
     goodAnswer.play()
   } else {
@@ -63,7 +63,7 @@ nextBtnFourth.addEventListener('click', function () {
 // --- 5page answer respond
 nextBtnFifth.addEventListener('click', function () {
   const inputValue = document.querySelectorAll('.slidepageinput')[4].value
-  if (inputValue === 'honey') {
+  if (inputValue.trim().toLowerCase() === 'honey') {
     slidePage.style.marginLeft = '-125%'
     goodAnswer.play()
   } else {
@@ -74,7 +74,7 @@ nextBtnFifth.addEventListener('click', function () {
 // --- 6page answer respond
 nextBtnSeventh.addEventListener('click', function () {
   const inputValue = document.querySelectorAll('.slidepageinput')[5].value
-  if (inputValue === '19') {
+  if (inputValue.trim().toLowerCase() === '19') {
     slidePage.style.marginLeft = '-150%'
     goodAnswer.play()
   } else {
@@ -86,8 +86,8 @@ nextBtnSeventh.addEventListener('click', function () {
 
 nextBtnEighth.addEventListener('click', function () {
   const inputValue = document.querySelectorAll('.slidepageinput')[6].value
-  if (inputValue === '3') {
-    slidePage.style.marginLeft = '-200%'
+  if (inputValue.trim().toLowerCase() === '3') {
+    slidePage.style.marginLeft = '-175%'
     goodAnswer.play()
   } else {
     noNo.play()
@@ -97,8 +97,8 @@ nextBtnEighth.addEventListener('click', function () {
 // --- 8page answer respond
 nextBtnNineth.addEventListener('click', function () {
   const inputValue = document.querySelectorAll('.slidepageinput')[7].value
-  if (inputValue === '8') {
-    slidePage.style.marginLeft = '-225%'
+  if (inputValue.trim().toLowerCase() === '8') {
+    slidePage.style.marginLeft = '-200%'
     goodAnswer.play()
   } else {
     noNo.play()
@@ -108,8 +108,8 @@ nextBtnNineth.addEventListener('click', function () {
 // --- 9page answer respond
 nextBtnTenth.addEventListener('click', function () {
   const inputValue = document.querySelectorAll('.slidepageinput')[8].value
-  if (inputValue === '7') {
-    slidePage.style.marginLeft = '-250%'
+  if (inputValue.trim().toLowerCase() === '7') {
+    slidePage.style.marginLeft = '-225%'
     goodAnswer.play()
   } else {
     noNo.play()
@@ -119,10 +119,43 @@ nextBtnTenth.addEventListener('click', function () {
 // --- 10page answer respond
 nextBtnEleventh.addEventListener('click', function () {
   const inputValue = document.querySelectorAll('.slidepageinput')[9].value
-  if (inputValue === 'giraffe') {
-    slidePage.style.marginLeft = '-275%'
+  if (inputValue.trim().toLowerCase() === 'giraffe') {
+    slidePage.style.marginLeft = '-250%'
     goodAnswer.play()
+    confetti()
   } else {
     noNo.play()
   }
 })
+
+// confetti
+
+function confetti() {
+  let duration = 15 * 1000
+  let animationEnd = Date.now() + duration
+  let defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 }
+
+  function randomInRange(min, max) {
+    return Math.random() * (max - min) + min
+  }
+
+  let interval = setInterval(function () {
+    let timeLeft = animationEnd - Date.now()
+
+    if (timeLeft <= 0) {
+      return clearInterval(interval)
+    }
+
+    let particleCount = 50 * (timeLeft / duration)
+    confetti({
+      ...defaults,
+      particleCount,
+      origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
+    })
+    confetti({
+      ...defaults,
+      particleCount,
+      origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
+    })
+  }, 250)
+}
